@@ -1,0 +1,27 @@
+{
+  "name": "film-here-next",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reach/combobox": "^0.10.5",
+    "next": "^9.5.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "use-places-autocomplete": "^1.3.10",
+    "date-fns": "^2.15.0",
+    "@react-google-maps/api": "^1.9.9"
+  },
+  "devDependencies": {
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.6.2"
+  }
+}
