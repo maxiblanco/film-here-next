@@ -1,32 +1,45 @@
 {
-  "name": "film-here-next",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
-  },
-  "keywords": [],
-  "author": "Maximiliano Blanco",
-  "license": "ISC",
-  "dependencies": {
-    "@prisma/client": "^2.4.1",
-    "@reach/combobox": "^0.10.5",
-    "@react-google-maps/api": "^1.9.9",
-    "date-fns": "^2.15.0",
-    "next": "^9.5.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "use-places-autocomplete": "^1.3.10"
-  },
-  "devDependencies": {
-    "@prisma/cli": "^2.4.1",
-    "@types/node": "^14.0.27",
-    "@types/react": "^16.9.44",
-    "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.6.2",
-    "typescript": "^3.9.7"
-  }
+    "name": "film-here-next",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint --fix .",
+        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    },
+    "keywords": [],
+    "author": "Maximiliano Blanco",
+    "license": "ISC",
+    "dependencies": {
+        "@prisma/client": "^2.4.1",
+        "@reach/combobox": "^0.10.5",
+        "@react-google-maps/api": "^1.9.9",
+        "date-fns": "^2.15.0",
+        "next": "^9.5.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "use-places-autocomplete": "^1.3.10"
+    },
+    "devDependencies": {
+        "@prisma/cli": "^2.4.1",
+        "@types/node": "^14.0.27",
+        "@types/react": "^16.9.44",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
+        "eslint": "^7.6.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-jsx-a11y": "^6.3.1",
+        "eslint-plugin-prettier": "^3.1.4",
+        "eslint-plugin-react": "^7.20.5",
+        "eslint-plugin-react-hooks": "^4.0.8",
+        "eslint-plugin-simple-import-sort": "^5.0.3",
+        "postcss-preset-env": "^6.7.0",
+        "prettier": "^2.0.5",
+        "tailwindcss": "^1.6.2",
+        "typescript": "^3.9.7",
+        "undefined": "^0.1.0"
+    }
 }
