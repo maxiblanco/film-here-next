@@ -13,6 +13,7 @@ import CameraIcon from '../components/CameraIcon';
 import useCreateLocation from '../hooks/useCreateLocation.ts';
 import mapStyles from '../styles/mapStyles';
 import Search from '../components/Search';
+import Locate from '../components/Locate';
 
 const libraries = ['places'];
 
