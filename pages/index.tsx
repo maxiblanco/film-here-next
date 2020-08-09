@@ -97,7 +97,10 @@ const App: React.FC = () => {
           ? locations.map((location) => (
               <Marker
                 key={location.createdAt}
-                position={{ lat: location.latitude, lng: location.longitude }}
+                position={{
+                  lat: location.latitude,
+                  lng: location.longitude
+                }}
                 icon={{
                   url: '/clapper.svg',
                   scaledSize: new window.google.maps.Size(30, 30),
