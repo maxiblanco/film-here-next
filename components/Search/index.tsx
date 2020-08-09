@@ -39,7 +39,7 @@ const Search = ({ panTo }) => {
           }
         }}>
         <ComboboxInput
-          className="w-full px-2 bg-gray-700 placeholder-white text-gray-100 rounded shadow bg-opacity-75"
+          className="w-full px-2 bg-gray-800 placeholder-white text-gray-100 rounded shadow bg-opacity-75"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           disabled={!ready}
