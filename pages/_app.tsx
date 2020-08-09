@@ -1,7 +1,9 @@
 import '../styles/index.css';
 import '@reach/combobox/styles.css';
 
-function MyApp({ Component, pageProps }) {
+import { AppProps } from 'next/app';
+
+function MyApp({ Component, pageProps }: AppProps): React.ReactNode {
   return <Component {...pageProps} />;
 }
 

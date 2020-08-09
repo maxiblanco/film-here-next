@@ -4,16 +4,16 @@ import {
   Marker,
   useLoadScript
 } from '@react-google-maps/api';
-import { formatRelative } from 'date-fns';
+/* import { formatRelative } from 'date-fns'; */
 import React, { useCallback, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 
 // Components
 import CameraIcon from '../components/CameraIcon';
-import useCreateLocation from '../hooks/useCreateLocation.ts';
-import mapStyles from '../styles/mapStyles';
-import Search from '../components/Search';
 import Locate from '../components/Locate';
+import Search from '../components/Search';
+import useCreateLocation from '../hooks/useCreateLocation';
+import mapStyles from '../styles/mapStyles';
 
 const libraries = ['places'];
 
@@ -28,11 +28,18 @@ const center = {
   lng: -58.37723
 };
 
-const options = {
+const mapOptions = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true
 };
+
+interface Location {
+  id?: string;
+  latitude: number;
+  longitude: number;
+  createdAt?: Date;
+}
 
 async function fetchLocationsRequest() {
   const response = await fetch('api/locations');
@@ -41,7 +48,7 @@ async function fetchLocationsRequest() {
   return locations;
 }
 
-const App = () => {
+const App: React.FC = () => {
   const { isLoaded, loadError } = useLoadScript({
     /* Google API Key must be enabled for Maps and Places API */
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -55,7 +62,7 @@ const App = () => {
 
   const [createLocation] = useCreateLocation();
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Location | null>(null);
 
   const handleMapClick = useCallback((e) => {
     createLocation({
@@ -64,19 +71,21 @@ const App = () => {
     });
   }, []);
 
-  const mapRef = useRef();
+  const mapRef = useRef(null);
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    if (mapRef.current) {
+      mapRef.current.panTo({ lat, lng });
+      mapRef.current.setZoom(14);
+    }
   }, []);
 
-  if (loadError) return 'Error loading map.';
+  if (loadError) return <p>{'Error loading map.'}</p>;
 
-  if (!isLoaded) return 'Loading map...';
+  if (!isLoaded) return <p>{'Loading map...'}</p>;
 
   return (
     <>
@@ -94,7 +103,7 @@ const App = () => {
         mapContainerStyle={mapContainerStyle}
         zoom={10}
         center={center}
-        options={options}
+        options={mapOptions}
         onClick={handleMapClick}
         onLoad={onMapLoad}>
         {locations

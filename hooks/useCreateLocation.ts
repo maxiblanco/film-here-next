@@ -1,4 +1,4 @@
-import { queryCache, useMutation } from 'react-query';
+import { MutationResultPair, queryCache, useMutation } from 'react-query';
 
 async function createLocationRequest(locationData) {
   const response = await fetch('api/locations/create', {
@@ -10,7 +10,7 @@ async function createLocationRequest(locationData) {
   return data;
 }
 
-function useCreateLocation() {
+function useCreateLocation(): MutationResultPair<any, unknown, any, unknown> {
   return useMutation(createLocationRequest, {
     onMutate: (locationData) => {
       // Cancel any query
@@ -18,7 +18,7 @@ function useCreateLocation() {
       // Save snapshot of queryCache for rollback
       const snapshot = queryCache.getQueryData('locations');
       // Optimistically update cache
-      queryCache.setQueryData('locations', (prev) => [
+      queryCache.setQueryData('locations', (prev: []) => [
         ...prev,
         {
           id: new Date().toISOString(),
@@ -29,7 +29,7 @@ function useCreateLocation() {
       // Return rollback, function that resets cache to snapshot
       return () => queryCache.setQueryData('locations', snapshot);
     },
-    onError: (error, locationData, rollback) => rollback(),
+    onError: (error, locationData, rollback: () => void) => rollback(),
     onSettled: () => queryCache.invalidateQueries('locations')
   });
 }
