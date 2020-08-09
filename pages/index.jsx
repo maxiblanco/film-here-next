@@ -160,14 +160,18 @@ const App = () => {
 
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
+            position={{ lat: selected.latitude, lng: selected.longitude }}
             onCloseClick={() => {
               setSelected(null);
             }}>
             <div>
               <h2>Hi Peeps</h2>
               <p>This is a good place to shoot!</p>
-              <p>Verified last {formatRelative(selected.time, new Date())}</p>
+              {/*               
+              TODO: Fix formatRelative createdAt not date error
+              <p>
+                Verified last {formatRelative(selected.createdAt, new Date())}
+              </p> */}
             </div>
           </InfoWindow>
         ) : null}
