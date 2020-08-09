@@ -9,18 +9,12 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 
 // Components
-import CameraIcon from '../components/CameraIcon';
-import Locate from '../components/Locate';
-import Search from '../components/Search';
+import Header from '../components/Header';
 import useCreateLocation from '../hooks/useCreateLocation';
+import useWindowSize from '../hooks/useWindowsSize';
 import mapStyles from '../styles/mapStyles';
 
 const libraries = ['places'];
-
-const mapContainerStyle = {
-  width: '100vw',
-  height: '100vh'
-};
 
 // Buenos Aires
 const center = {
@@ -49,6 +43,7 @@ async function fetchLocationsRequest() {
 }
 
 const App: React.FC = () => {
+  const windowSize = useWindowSize();
   const { isLoaded, loadError } = useLoadScript({
     /* Google API Key must be enabled for Maps and Places API */
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -79,7 +74,7 @@ const App: React.FC = () => {
   const panTo = useCallback(({ lat, lng }) => {
     if (mapRef.current) {
       mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(14);
+      mapRef.current.setZoom(16);
     }
   }, []);
 
@@ -89,18 +84,10 @@ const App: React.FC = () => {
 
   return (
     <>
-      <div className="relative flex justify-center w-full">
-        <h1 className="absolute top-0 left-0 z-10 p-0 m-0 mt-4 ml-4 text-2xl">
-          Film Here <CameraIcon />
-        </h1>
-
-        <Search panTo={panTo} />
-
-        <Locate panTo={panTo} />
-      </div>
+      <Header panTo={panTo} />
 
       <GoogleMap
-        mapContainerStyle={mapContainerStyle}
+        mapContainerStyle={windowSize}
         zoom={10}
         center={center}
         options={mapOptions}
