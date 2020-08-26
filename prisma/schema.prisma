@@ -10,9 +10,34 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+// RUN GENERATE - EMPTY PREVIOUS RECORDS
+// TODO: Create Endpoint to create users. POST
+// TODO: Create login method. Use https://next-auth.js.org/
+model User {
+  id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
+  firstName String
+  lastName  String
+  email     String     @unique
+  phone     String?
+  role      Role       @default(USER)
+  Locations Location[]
+}
+
 model Location {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  latitude  Float
-  longitude Float
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  description String
+  latitude    Float
+  longitude   Float
+  published   Boolean  @default(false)
+  userId      Int
 }

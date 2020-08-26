@@ -1,9 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
   const prisma = new PrismaClient({ log: ['query'] });
 
+  //TODO ADD REQUIRED FIELDS
   try {
     const { location: locationData } = req.body;
     const location = await prisma.location.create({
